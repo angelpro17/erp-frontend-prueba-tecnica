@@ -1,0 +1,128 @@
+<div class="detail-container">
+  <div class="header-actions">
+    <button mat-raised-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Volver
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Cargando detalles del comprobante...</p>
+  </div>
+
+  <div *ngIf="!isLoading && comprobante" class="content-grid">
+
+    <!-- Información Principal -->
+    <mat-card class="main-info-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>receipt</mat-icon>
+        <mat-card-title>Detalle del Comprobante</mat-card-title>
+        <mat-card-subtitle>Información completa del documento</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Tipo de Documento:</label>
+            <mat-chip-set>
+              <mat-chip [class]="getDocumentChipClass(comprobante.tipoDocumento)">
+                {{ comprobante.tipoDocumento }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="info-item">
+            <label>Monto:</label>
+            <span class="amount">{{ comprobante.moneda }} {{ comprobante.monto | number:'1.2-2' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Período:</label>
+            <span>{{ comprobante.periodo }}</span>
+          </div>
+          <div class="info-item">
+            <label>Fecha de Emisión:</label>
+            <span>{{ comprobante.fechaEmision }}</span>
+          </div>
+          <div class="info-item">
+            <label>Estado:</label>
+            <mat-chip-set>
+              <mat-chip [class]="getStatusChipClass(comprobante.estado)">
+                {{ comprobante.estado }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Información del Cliente -->
+    <mat-card class="client-info-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>
+          {{ comprobante.tipoPersona === 'Natural' ? 'person' : 'business' }}
+        </mat-icon>
+        <mat-card-title>Información del Cliente</mat-card-title>
+        <mat-card-subtitle>{{ comprobante.tipoPersona }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="client-details">
+          <div class="client-name">
+            <h3>{{ comprobante.cliente }}</h3>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="client-id">
+            <label>{{ comprobante.tipoPersona === 'Natural' ? 'DNI:' : 'RUC:' }}</label>
+            <span class="id-number">{{ comprobante.ruc || comprobante.dni }}</span>
+          </div>
+          <div class="client-type">
+            <label>Tipo de Persona:</label>
+            <div class="type-badge">
+              <mat-icon>{{ comprobante.tipoPersona === 'Natural' ? 'person' : 'business' }}</mat-icon>
+              <span>{{ comprobante.tipoPersona }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Vista Previa -->
+    <mat-card class="preview-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>preview</mat-icon>
+        <mat-card-title>Vista Previa</mat-card-title>
+        <mat-card-subtitle>Representación visual del comprobante</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Contenedor que se exportará a PDF -->
+        <div id="pdf-content" style="background:#fff; padding:20px; color:#000;">
+          <div class="document-header">
+            <h4>{{ comprobante.tipoDocumento }}</h4>
+            <p>N° {{ comprobante.id.padStart(8, '0') }}</p>
+          </div>
+          <div class="document-body">
+            <div class="field"><strong>Cliente:</strong> {{ comprobante.cliente }}</div>
+            <div class="field"><strong>{{ comprobante.tipoPersona === 'Natural' ? 'DNI' : 'RUC' }}:</strong> {{ comprobante.ruc || comprobante.dni }}</div>
+            <div class="field"><strong>Fecha:</strong> {{ comprobante.fechaEmision }}</div>
+            <div class="field"><strong>Período:</strong> {{ comprobante.periodo }}</div>
+          </div>
+          <div class="document-footer">
+            <div class="total"><strong>Total: {{ comprobante.moneda }} {{ comprobante.monto | number:'1.2-2' }}</strong></div>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="preview-actions">
+          <button mat-raised-button color="primary" (click)="generatePDF()">
+            <mat-icon>download</mat-icon> Generar PDF
+          </button>
+          <button mat-stroked-button (click)="printPage()">
+            <mat-icon>print</mat-icon> Imprimir
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
