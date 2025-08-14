@@ -1,60 +1,137 @@
-# ModuloERP
+# Sistema ERP - Prueba Técnica Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Material y JSON Server para fake API.
 
-## Development server
+## 🚀 Características
 
-To start a local development server, run:
+- **Autenticación simulada** con JWT y AuthGuard
+- **Fake API** con JSON Server para consumo real de datos
+- **Gestión de comprobantes** con filtros avanzados
+- **Vista detallada** de comprobantes con preview
+- **Arquitectura limpia** con componentes standalone
+- **Responsive design** con Angular Material
+- **TypeScript** con tipado estricto
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Tecnologías
 
-## Code scaffolding
+- **Angular 19** con componentes standalone
+- **Angular Material** para UI/UX
+- **JSON Server** para fake API REST
+- **TypeScript** con configuración estricta
+- **RxJS** para programación reactiva
+- **Angular Router** con lazy loading
+- **CSS** (no SCSS) para estilos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📱 Funcionalidades
 
-```bash
-ng generate component component-name
-```
+### 1. Login Simulado
+- Formulario reactivo con validaciones
+- Simulación de JWT token
+- AuthGuard para proteger rutas
+- Credenciales de prueba incluidas
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 2. Gestión de Comprobantes
+- Listado con tabla responsive
+- Filtros por tipo de cliente y período (formato YYYY-MM)
+- Diferenciación entre personas naturales y jurídicas
+- Navegación a vista detallada
+- Consumo de API REST con JSON Server
 
-```bash
-ng generate --help
-```
+### 3. Detalle de Comprobante
+- Información completa del documento
+- Vista previa mockup del comprobante
+- Identificación automática de tipo de persona
+- Acciones de descarga e impresión (simuladas)
 
-## Building
+## 🚀 Instalación y Ejecución
 
-To build the project run:
+\`\`\`bash
+# Instalar dependencias
+npm install
 
-```bash
-ng build
-```
+# Opción 1: Ejecutar Angular y JSON Server por separado
+# Terminal 1 - JSON Server (puerto 3001)
+npm run json-server
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+# Terminal 2 - Angular (puerto 4200)
+npm start
 
-## Running unit tests
+# Opción 2: Ejecutar ambos simultáneamente
+npm run dev
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+# Construir para producción
+npm run build
 
-```bash
-ng test
-```
+# Ejecutar tests
+npm test
+\`\`\`
 
-## Running end-to-end tests
+## 🌐 API Endpoints
 
-For end-to-end (e2e) testing, run:
+JSON Server ejecutándose en `http://localhost:3001`:
 
-```bash
-ng e2e
-```
+- `GET /comprobantes` - Obtener todos los comprobantes
+- `GET /comprobantes/:id` - Obtener comprobante por ID
+- `GET /auth/users` - Obtener usuarios para autenticación
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🔐 Credenciales de Prueba
 
-## Additional Resources
+- **Admin**: admin@empresa.com / admin123
+- **Usuario**: usuario@empresa.com / usuario123
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# erp-frontend-prueba-tecnica
+## 📊 Datos de Prueba
+
+El sistema incluye 5 comprobantes de ejemplo con diferentes:
+- Tipos de documento (Factura, Boleta, Nota de crédito)
+- Clientes naturales y jurídicos
+- Períodos en formato YYYY-MM (2024-11, 2024-12)
+- Montos en PEN y USD
+- Estados de pago
+
+## 🎨 Diseño
+
+- **Diseño profesional** sin gradientes llamativos
+- **Colores corporativos** azul y gris
+- **Material Design** con tema personalizado
+- **Responsive** para móviles y desktop
+- **Accesibilidad** con ARIA labels
+- **UX optimizada** con loading states y feedback
+
+## 🔧 Configuración
+
+- **Standalone Components** para mejor tree-shaking
+- **Lazy Loading** para optimización de carga
+- **HTTP Client** para consumo de API REST
+- **Interceptores** para manejo automático de tokens
+- **Guards** para protección de rutas
+- **Servicios** con inyección de dependencias moderna
+- **Fallback** a datos mock si falla JSON Server
+
+## 📝 Scripts Disponibles
+
+- `npm start` - Ejecutar Angular en desarrollo
+- `npm run json-server` - Ejecutar JSON Server en puerto 3001
+- `npm run dev` - Ejecutar Angular y JSON Server simultáneamente
+- `npm run mock:server` - Alias para json-server
+- `npm run build` - Construir para producción
+- `npm test` - Ejecutar tests unitarios
+
+
+## 📝 Notas Técnicas
+
+- Uso de `inject()` function en lugar de constructor injection
+- Componentes standalone sin NgModules
+- Reactive Forms con validaciones
+- Observables y async pipe para manejo de estado
+- HTTP Client para consumo de API REST
+- Manejo de errores con fallback a datos mock
+- CSS separado por componente (no SCSS)
+- Arquitectura limpia y escalable
+
+## 🚨 Requisitos
+
+- Node.js 18+
+- Angular CLI 19+
+- Puerto 3001 disponible para JSON Server
+- Puerto 4200 disponible para Angular
