@@ -1,0 +1,75 @@
+{
+  "auth": {
+    "users": [
+      { "id": 1, "email": "admin@empresa.com", "password": "admin123","role": "admin" },
+      { "id": 2, "email": "user@empresa.com", "password": "user123","role": "user" }
+    ]
+  },
+  "comprobantes": [
+    {
+      "id": "1",
+      "cliente": "ACME Construcciones S.A.C.",
+      "ruc": "20123456789",
+      "tipoDocumento": "Factura",
+      "monto": 1500.5,
+      "moneda": "PEN",
+      "periodo": "2024-12",
+      "fechaEmision": "15/01/2025",
+      "tipoPersona": "Jurídica",
+      "estado": "Pendiente",
+      "urlPreview": "/assets/previews/1.pdf"
+    },
+    {
+      "id": "2",
+      "cliente": "Juan Carlos Pérez García",
+      "dni": "12345678",
+      "tipoDocumento": "Boleta",
+      "monto": 120.0,
+      "moneda": "PEN",
+      "periodo": "2024-12",
+      "fechaEmision": "17/01/2025",
+      "tipoPersona": "Natural",
+      "estado": "Pagado",
+      "urlPreview": "/assets/previews/2.png"
+    },
+    {
+      "id": "3",
+      "cliente": "Distribuidora Los Andes E.I.R.L.",
+      "ruc": "20987654321",
+      "tipoDocumento": "Nota de crédito",
+      "monto": 350.75,
+      "moneda": "USD",
+      "periodo": "2024-11",
+      "fechaEmision": "28/12/2024",
+      "tipoPersona": "Jurídica",
+      "estado": "Pagado",
+      "urlPreview": "/assets/previews/3.pdf"
+    },
+    {
+      "id": "4",
+      "cliente": "María Elena Rodríguez Vásquez",
+      "dni": "87654321",
+      "tipoDocumento": "Factura",
+      "monto": 2100.0,
+      "moneda": "PEN",
+      "periodo": "2024-12",
+      "fechaEmision": "20/01/2025",
+      "tipoPersona": "Natural",
+      "estado": "Pendiente",
+      "urlPreview": "/assets/previews/4.png"
+    },
+    {
+      "id": "5",
+      "cliente": "Tecnología y Sistemas Innovadores S.A.",
+      "ruc": "20553444333",
+      "tipoDocumento": "Boleta",
+      "monto": 890.25,
+      "moneda": "PEN",
+      "periodo": "2024-11",
+      "fechaEmision": "30/12/2024",
+      "tipoPersona": "Jurídica",
+      "estado": "Vencido",
+      "urlPreview": "/assets/previews/5.pdf"
+    }
+  ]
+}

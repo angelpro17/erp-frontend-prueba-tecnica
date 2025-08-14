@@ -1,0 +1,127 @@
+<div class="comprobantes-container">
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>receipt_long</mat-icon>
+      <mat-card-title>Comprobantes</mat-card-title>
+      <mat-card-subtitle>Gestione y consulte los comprobantes del sistema</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <form [formGroup]="filterForm" class="filters-form">
+        <div class="filter-row">
+          <mat-form-field>
+            <mat-label>Tipo de Cliente</mat-label>
+            <mat-select formControlName="tipoCliente">
+              <mat-option value="todos">Todos los clientes</mat-option>
+              <mat-option value="natural">Natural</mat-option>
+              <mat-option value="juridica">Jurídica</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Período</mat-label>
+            <mat-select formControlName="periodo">
+              <mat-option value="todos">Todos los períodos</mat-option>
+              <mat-option *ngFor="let periodo of periodos" [value]="periodo">
+                {{ periodo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button
+                  color="primary"
+                  (click)="clearFilters()"
+                  type="button">
+            <mat-icon>clear</mat-icon>
+            Limpiar Filtros
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <mat-card-content>
+      <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Cargando comprobantes...</p>
+      </div>
+
+      <div *ngIf="!isLoading" class="table-container">
+        <table mat-table [dataSource]="comprobantes" class="comprobantes-table">
+
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef>Cliente</th>
+            <td mat-cell *matCellDef="let comprobante">
+              <div class="cliente-info">
+                <strong>{{ comprobante.cliente }}</strong>
+                <small>{{ comprobante.ruc || comprobante.dni }}</small>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoDocumento">
+            <th mat-header-cell *matHeaderCellDef>Tipo Documento</th>
+            <td mat-cell *matCellDef="let comprobante">
+              <mat-chip-set>
+                <mat-chip [class]="getDocumentChipClass(comprobante.tipoDocumento)">
+                  {{ comprobante.tipoDocumento }}
+                </mat-chip>
+              </mat-chip-set>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef>Monto</th>
+            <td mat-cell *matCellDef="let comprobante">
+              <strong>{{ comprobante.moneda }} {{ comprobante.monto | number:'1.2-2' }}</strong>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="periodo">
+            <th mat-header-cell *matHeaderCellDef>Período</th>
+            <td mat-cell *matCellDef="let comprobante">{{ comprobante.periodo }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaEmision">
+            <th mat-header-cell *matHeaderCellDef>Fecha Emisión</th>
+            <td mat-cell *matCellDef="let comprobante">{{ comprobante.fechaEmision }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoPersona">
+            <th mat-header-cell *matHeaderCellDef>Tipo Persona</th>
+            <td mat-cell *matCellDef="let comprobante">
+              <mat-icon class="person-icon">
+                {{ comprobante.tipoPersona === 'Natural' ? 'person' : 'business' }}
+              </mat-icon>
+              {{ comprobante.tipoPersona }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let comprobante">
+              <button mat-icon-button
+                      color="primary"
+                      (click)="viewDetails(comprobante.id)"
+                      matTooltip="Ver Detalles">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              class="table-row"
+              (click)="viewDetails(row.id)"></tr>
+        </table>
+
+        <div class="results-info">
+          <p>Mostrando {{ comprobantes.length }} comprobante(s)</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
