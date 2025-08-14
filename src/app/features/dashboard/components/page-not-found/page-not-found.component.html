@@ -1,0 +1,34 @@
+<div class="full-screen-container">
+  <div class="error-content">
+    <div class="error-header">
+      <mat-icon>error_outline</mat-icon>
+      <h1>404</h1>
+    </div>
+
+    <h2>¡Oops! Esta página se perdió en el sistema ERP</h2>
+    <p>Mientras tanto, ¡juega y ayuda al contador a saltar los obstáculos fiscales!</p>
+
+    <div class="score-display">
+      <span>Puntuación: {{score()}}</span>
+      <span>Mejor: {{highScore()}}</span>
+    </div>
+
+    <div class="game-container">
+      <canvas #gameCanvas
+              width="800"
+              height="300"
+              (click)="jump()"
+              tabindex="0"></canvas>
+
+      <div class="instructions" *ngIf="!gameStarted()">
+        <p>Presiona ESPACIO o haz click para saltar</p>
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" routerLink="/dashboard">Volver al Dashboard</button>
+      <button mat-stroked-button routerLink="/login">Iniciar Sesión</button>
+    </div>
+  </div>
+</div>
