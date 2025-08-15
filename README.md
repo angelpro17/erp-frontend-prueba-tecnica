@@ -1,4 +1,4 @@
-# Sistema ERP - Prueba Técnica Frontend
+**# Sistema ERP - Prueba Técnica Frontend
 
 Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Material y JSON Server para fake API.
 
@@ -6,12 +6,11 @@ Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Materia
 
 - **Autenticación simulada** con JWT y AuthGuard
 - **Fake API** con JSON Server para consumo real de datos
-- **Gestión de comprobantes** con filtros avanzados
+- **Gestión de comprobantes** con filtros (Lógica)
 - **Vista detallada** de comprobantes con preview
 - **Arquitectura limpia** con componentes standalone
 - **Responsive design** con Angular Material
 - **TypeScript** con tipado estricto
-
 
 ## 🛠️ Tecnologías
 
@@ -21,7 +20,6 @@ Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Materia
 - **TypeScript** con configuración estricta
 - **RxJS** para programación reactiva
 - **Angular Router** con lazy loading
-- **CSS** (no SCSS) para estilos
 
 ## 📱 Funcionalidades
 
@@ -30,13 +28,14 @@ Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Materia
 - Simulación de JWT token
 - AuthGuard para proteger rutas
 - Credenciales de prueba incluidas
+- Diseño limpio sin gradientes llamativos
 
 ### 2. Gestión de Comprobantes
 - Listado con tabla responsive
-- Filtros por tipo de cliente y período (formato YYYY-MM)
+- Filtros funcionales por tipo de cliente y período
 - Diferenciación entre personas naturales y jurídicas
 - Navegación a vista detallada
-- Consumo de API REST con JSON Server
+- **Consumo exclusivo de API fake del puerto 3000**
 
 ### 3. Detalle de Comprobante
 - Información completa del documento
@@ -46,39 +45,62 @@ Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Materia
 
 ## 🚀 Instalación y Ejecución
 
-\`\`\`bash
-# Instalar dependencias
+### 1. Clonar el repositorio
+```bash
+# Clonar el repositorio
+git clone https://github.com/erp-reclutamiento/prueba-frontend-Luis-Angel-Anampa-Lavado.git
+
+# Navegar al directorio del proyecto
+cd prueba-frontend-Luis-Angel-Anampa-Lavado/Modulo-ERP
+```
+
+### 2. Instalar dependencias
+```bash
 npm install
+```
 
-# Opción 1: Ejecutar Angular y JSON Server por separado
-# Terminal 1 - JSON Server (puerto 3001)
-npm run json-server
+### 3. Instalar JSON Server globalmente
+```bash
+npm install -g json-server
+```
 
-# Terminal 2 - Angular (puerto 4200)
-npm start
+### 4. Ejecutar JSON Server (Puerto 3000 - OBLIGATORIO)
+```bash
+# Terminal 1 - JSON Server
+cd assets
+json-server --watch db.json --port 3000
+```
 
-# Opción 2: Ejecutar ambos simultáneamente
-npm run dev
+### 5. Ejecutar Angular (Puerto 4200)
+```bash
+# Terminal 2 - Angular
+npm run start
+```
+
+### Comandos npm alternativos
+```bash
 
 # Construir para producción
 npm run build
 
 # Ejecutar tests
 npm test
-\`\`\`
+```
 
 ## 🌐 API Endpoints
 
-JSON Server ejecutándose en `http://localhost:3001`:
+JSON Server ejecutándose en `http://localhost:3000`:
 
+- `GET /auth` - Obtener datos de autenticación (contiene array users)
 - `GET /comprobantes` - Obtener todos los comprobantes
 - `GET /comprobantes/:id` - Obtener comprobante por ID
-- `GET /auth/users` - Obtener usuarios para autenticación
+
+**IMPORTANTE**: El sistema consume **ÚNICAMENTE** la API fake del puerto 3000, no hay fallback a otros JSON.
 
 ## 🔐 Credenciales de Prueba
 
-- **Admin**: admin@empresa.com / admin123
-- **Usuario**: usuario@empresa.com / usuario123
+- **Admin**: `admin@empresa.com` / `admin123`
+- **Usuario**: `usuario@empresa.com` / `usuario123`
 
 ## 📊 Datos de Prueba
 
@@ -87,51 +109,69 @@ El sistema incluye 5 comprobantes de ejemplo con diferentes:
 - Clientes naturales y jurídicos
 - Períodos en formato YYYY-MM (2024-11, 2024-12)
 - Montos en PEN y USD
-- Estados de pago
+- Estados y fechas de emisión
 
-## 🎨 Diseño
-
-- **Diseño profesional** sin gradientes llamativos
-- **Colores corporativos** azul y gris
-- **Material Design** con tema personalizado
-- **Responsive** para móviles y desktop
-- **Accesibilidad** con ARIA labels
-- **UX optimizada** con loading states y feedback
-
-## 🔧 Configuración
+## 🔧 Configuración Técnica
 
 - **Standalone Components** para mejor tree-shaking
 - **Lazy Loading** para optimización de carga
-- **HTTP Client** para consumo de API REST
+- **HTTP Client** configurado para puerto 3000 únicamente
 - **Interceptores** para manejo automático de tokens
 - **Guards** para protección de rutas
-- **Servicios** con inyección de dependencias moderna
-- **Fallback** a datos mock si falla JSON Server
+- **Servicios** con inyección moderna usando `inject()`
+- **Filtros** que funcionan correctamente
 
-## 📝 Scripts Disponibles
+## 🔍 Filtros Funcionales
 
-- `npm start` - Ejecutar Angular en desarrollo
-- `npm run json-server` - Ejecutar JSON Server en puerto 3001
-- `npm run dev` - Ejecutar Angular y JSON Server simultáneamente
-- `npm run mock:server` - Alias para json-server
-- `npm run build` - Construir para producción
-- `npm test` - Ejecutar tests unitarios
-
-
-## 📝 Notas Técnicas
-
-- Uso de `inject()` function en lugar de constructor injection
-- Componentes standalone sin NgModules
-- Reactive Forms con validaciones
-- Observables y async pipe para manejo de estado
-- HTTP Client para consumo de API REST
-- Manejo de errores con fallback a datos mock
-- CSS separado por componente (no SCSS)
-- Arquitectura limpia y escalable
+- **Tipo de Cliente**: Natural, Jurídica, Todos los clientes
+- **Período**: Formato YYYY-MM (2024-11, 2024-12, Todos los períodos)
+- **Limpiar Filtros**: Botón para resetear todos los filtros
 
 ## 🚨 Requisitos
 
 - Node.js 18+
 - Angular CLI 19+
-- Puerto 3001 disponible para JSON Server
+- **Puerto 3000 disponible para JSON Server**
 - Puerto 4200 disponible para Angular
+
+## 🔧 Pasos de Desarrollo
+
+### 1. Clonar y preparar el entorno
+```bash
+# Clonar repositorio
+git clone https://github.com/erp-reclutamiento/prueba-frontend-Luis-Angel-Anampa-Lavado.git
+
+# Navegar al directorio
+cd prueba-frontend-Luis-Angel-Anampa-Lavado/Modulo-ERP
+
+# Instalar dependencias
+npm install
+
+# Instalar JSON Server globalmente
+npm install -g json-server
+```
+
+### 2. Ejecutar JSON Server (OBLIGATORIO)
+```bash
+# En la raíz del proyecto
+cd assets
+json-server --watch db.json --port 3000
+```
+
+### 3. Ejecutar Angular
+```bash
+# En otra terminal
+npm run start
+```
+
+### 4. Acceder a la aplicación
+```
+http://localhost:4200
+```
+
+## 📝 Notas Importantes
+
+- **API Fake**: El sistema consume ÚNICAMENTE del puerto 3000
+- **Filtros**: Completamente funcionales
+- **Arquitectura**: Angular 19 standalone con mejores prácticas
+- **Autenticación**: JWT simulado con localStorage

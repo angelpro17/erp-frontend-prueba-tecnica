@@ -1,4 +1,4 @@
-/* Corrigiendo estilos del login - removiendo fondo fucsia y contornos blancos */
+/* login.component.css */
 .login-container {
   display: flex;
   justify-content: center;
@@ -18,14 +18,15 @@
 }
 
 .login-header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 32px;
+  text-align: center;
 }
 
 .logo-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .logo-icon {
@@ -40,17 +41,23 @@
   justify-content: center;
 }
 
-.login-header h1 {
-  margin: 16px 0 8px 0;
+mat-card-title {
+  margin-bottom: 0;
+  order: 1;
   color: #1a1a1a;
   font-size: 24px;
   font-weight: 600;
 }
 
-.login-header p {
-  margin: 0;
+mat-card-subtitle {
+  order: 3;
+  margin-top: 0;
   color: #666;
   font-size: 14px;
+}
+
+.logo-container {
+  order: 2;
 }
 
 .full-width {
@@ -67,6 +74,10 @@
 
 .login-button:hover {
   background: #333;
+}
+
+.login-button:disabled {
+  background: #cccccc;
 }
 
 .credentials-info {
@@ -103,4 +114,23 @@ mat-form-field {
 ::ng-deep .mat-mdc-text-field-wrapper {
   background-color: #f8f9fa;
   border-radius: 4px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+::ng-deep .mat-mdc-form-field-error {
+  color: #d32f2f;
+  font-size: 12px;
+}
+
+.success-snackbar {
+  background: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background: #f44336;
+  color: white;
 }

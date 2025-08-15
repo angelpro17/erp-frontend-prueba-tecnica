@@ -1,9 +1,9 @@
 <div class="comprobantes-container">
   <mat-card class="header-card">
     <mat-card-header>
-      <mat-icon mat-card-avatar>receipt_long</mat-icon>
+      <mat-icon mat-card-avatar>description</mat-icon>
       <mat-card-title>Comprobantes</mat-card-title>
-      <mat-card-subtitle>Gestione y consulte los comprobantes del sistema</mat-card-subtitle>
+      <mat-card-subtitle class="section-description">Gestione y consulte los comprobantes del sistema</mat-card-subtitle>
     </mat-card-header>
   </mat-card>
 
@@ -31,6 +31,7 @@
           </mat-form-field>
 
           <button mat-raised-button
+                  class="clear-filters-button"
                   color="primary"
                   (click)="clearFilters()"
                   type="button">

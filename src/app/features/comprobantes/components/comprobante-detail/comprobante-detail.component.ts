@@ -87,7 +87,7 @@ export class ComprobanteDetailComponent implements OnInit {
       backgroundColor: '#ffffff',
       ignoreElements: (el) => {
         const style = getComputedStyle(el);
-        return style.color.includes('color('); // Evita error de color()
+        return style.color.includes('color(');
       }
     }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');

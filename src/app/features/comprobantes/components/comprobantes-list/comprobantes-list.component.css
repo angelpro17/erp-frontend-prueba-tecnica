@@ -6,7 +6,11 @@
 .header-card {
   margin-bottom: 16px;
 }
-
+.section-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 24px 0;
+}
 .filters-card {
   margin-bottom: 16px;
 }
@@ -48,6 +52,9 @@
   min-width: 800px;
 }
 
+.clear-filters-button{
+  margin-top: -22px;
+}
 .table-row {
   cursor: pointer;
   transition: background-color 0.2s;

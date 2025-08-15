@@ -1,3 +1,4 @@
+// login.component.ts
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -36,12 +37,19 @@ export class LoginComponent {
   private readonly snackBar = inject(MatSnackBar);
 
   protected loginForm: FormGroup = this.fb.group({
-    identifier: ['', [Validators.required]], // correo o nombre
+    identifier: ['', [
+      Validators.required,
+      Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+    ]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   protected hidePassword = true;
   protected isLoading = false;
+
+  get f() {
+    return this.loginForm.controls;
+  }
 
   protected onSubmit(): void {
     if (this.loginForm.invalid || this.isLoading) return;
@@ -51,7 +59,10 @@ export class LoginComponent {
     this.authService.login(payload).subscribe({
       next: () => {
         this.isLoading = false;
-        this.snackBar.open('¡Bienvenido al Sistema ERP!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
+        this.snackBar.open('¡Bienvenido al Sistema ERP!', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
         const redirectTo = (new URLSearchParams(location.search)).get('redirectTo') || '/dashboard';
         this.router.navigateByUrl(redirectTo);
       },
@@ -60,7 +71,10 @@ export class LoginComponent {
         const msg = error?.status === 401 ? 'Credenciales inválidas'
           : (error?.status === 0 ? 'Error de conexión con el servidor'
             : (error?.message || 'Error en el servidor'));
-        this.snackBar.open(msg, 'Cerrar', { duration: 5000, panelClass: ['error-snackbar'] });
+        this.snackBar.open(msg, 'Cerrar', {
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }

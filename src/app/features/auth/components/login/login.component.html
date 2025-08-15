@@ -1,18 +1,24 @@
+<!-- login.component.html -->
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header class="login-header">
-      <div class="logo-container"><mat-icon class="logo-icon">receipt_long</mat-icon></div>
       <mat-card-title>Sistema ERP</mat-card-title>
+
+      <div class="logo-container">
+        <mat-icon class="logo-icon">receipt_long</mat-icon>
+      </div>
+
       <mat-card-subtitle>Ingrese sus credenciales para acceder</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field class="full-width">
-          <mat-label>Email o Usuario</mat-label>
+          <mat-label>Email</mat-label>
           <input matInput type="text" formControlName="identifier" placeholder="admin@empresa.com">
           <mat-icon matSuffix>person</mat-icon>
-          <mat-error *ngIf="loginForm.get('identifier')?.hasError('required')">Requerido</mat-error>
+          <mat-error *ngIf="f['identifier'].hasError('required')">Email requerido</mat-error>
+          <mat-error *ngIf="f['identifier'].hasError('pattern')">Ingrese un email válido</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -21,7 +27,8 @@
           <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es requerida</mat-error>
+          <mat-error *ngIf="f['password'].hasError('required')">La contraseña es requerida</mat-error>
+          <mat-error *ngIf="f['password'].hasError('minlength')">Mínimo 6 caracteres</mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit" class="full-width login-button" [disabled]="loginForm.invalid || isLoading">

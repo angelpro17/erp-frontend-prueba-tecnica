@@ -2,21 +2,20 @@
   <div class="toolbar-content">
     <div class="logo-section">
       <mat-icon class="logo-icon">receipt_long</mat-icon>
-      <span class="app-title">Sistema ERP</span>
-      <span class="subtitle">Gestión de Comprobantes</span>
+      <div class="title-container">
+        <span class="app-title">Sistema ERP</span>
+        <span class="subtitle">Gestión de Comprobantes</span>
+      </div>
     </div>
-    
     <div class="user-section">
-      <span class="user-name">{{ currentUser?.name }}</span>
-      <button mat-icon-button [matMenuTriggerFor]="userMenu">
-        <mat-icon>account_circle</mat-icon>
+      <div class="user-info">
+        <mat-icon class="user-icon">person</mat-icon>
+        <span class="user-name">{{ currentUser?.name }}</span>
+      </div>
+      <button class="logout-button" (click)="logout()">
+        <mat-icon class="logout-icon">logout</mat-icon>
+        <span class="logout-text">Cerrar Sesión</span>
       </button>
-      <mat-menu #userMenu="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Cerrar Sesión</span>
-        </button>
-      </mat-menu>
     </div>
   </div>
 </mat-toolbar>
@@ -24,3 +23,4 @@
 <main class="main-content">
   <router-outlet></router-outlet>
 </main>
+
