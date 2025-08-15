@@ -1,4 +1,4 @@
-**# Sistema ERP - Prueba Técnica Frontend
+# Sistema ERP - Prueba Técnica Frontend
 
 Sistema de gestión de comprobantes desarrollado con Angular 19, Angular Material y JSON Server para fake API.
 
